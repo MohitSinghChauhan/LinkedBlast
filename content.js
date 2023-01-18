@@ -19,6 +19,30 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
  
         }
 
+        let observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                for (let i = 0; i < mutation.addedNodes.length; i++) {
+                    let node = mutation.addedNodes[i];
+        
+                    if (node.classList && node.classList.contains("mn-connection-card")) {
+                        let checkbox = document.createElement("input");
+                        checkbox.type = "checkbox";
+                        checkbox.classList.add("username-checkbox");
+        
+                        checkbox.style.pointerEvents="all";
+                        checkbox.style.opacity="inherit";
+                        checkbox.style.cursor="pointer";
+                        checkbox.style.position="inherit";
+        
+                        node.insertBefore(checkbox, node.children[0]);
+                    }
+                }
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+
         // Create a submit button and add it to the page
         let submitButton = document.createElement("input");
         submitButton.type = "submit";

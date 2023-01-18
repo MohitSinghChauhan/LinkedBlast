@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "LinkedBlast",
   "description": "The ultimate LinkedIn cold-emailing solution for skyrocketing sales and job referrals",
   "version": "1.0",
@@ -7,10 +7,11 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_start"
     }
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
   }
 }
